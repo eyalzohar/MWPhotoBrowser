@@ -1586,7 +1586,7 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
 
     // Only react when image has loaded
     id <MWPhoto> photo = [self photoAtIndex:_currentPageIndex];
-    if ([self numberOfPhotos] > 0 && [photo underlyingImage]) {
+    if ([self numberOfPhotos] > 0/* && [photo underlyingImage]*/) {
         
         // If they have defined a delegate method then just message them
         if ([self.delegate respondsToSelector:@selector(photoBrowser:actionButtonPressedForPhotoAtIndex:)]) {
