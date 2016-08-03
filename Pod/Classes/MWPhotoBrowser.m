@@ -1596,6 +1596,7 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
             
         } else if ([self.delegate respondsToSelector:@selector(photoBrowser:actionButtonPressedForPhotoURL:)]) {
         	if ([photo respondsToSelector:@selector(isVideo)] && photo.isVideo) {
+        	typeof(self) __weak weakSelf = self;
         	[photo getVideoURL:^(NSURL *url) {
         		 dispatch_async(dispatch_get_main_queue(), ^{
         			if (url) {
