@@ -1596,10 +1596,18 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
             
         } else if ([self.delegate respondsToSelector:@selector(photoBrowser:actionButtonPressedForPhotoURL:)]) {
         	if ([photo respondsToSelector:@selector(isVideo)] && photo.isVideo) {
-        	    [self.delegate photoBrowser:self actionButtonPressedForPhotoURL:photo.videoURL];
-        	 } else {
-        	    [self.delegate photoBrowser:self actionButtonPressedForPhotoURL:[photo getPhotoURL]];
-        	 }
+        	[photo getVideoURL:^(NSURL *url) {
+        		 dispatch_async(dispatch_get_main_queue(), ^{
+        			if (url) {
+        	 			[weakSelf.delegate photoBrowser:self actionButtonPressedForPhotoURL:url];
+                		} else {
+        	 			[weakSelf.delegate photoBrowser:self actionButtonPressedForPhotoURL:nil];
+        			}
+        		});
+		   }];
+		 } else {
+        	 [self.delegate photoBrowser:self actionButtonPressedForPhotoURL:[photo getPhotoURL]];
+    		}
         } else {
             
             // Show activity view controller
