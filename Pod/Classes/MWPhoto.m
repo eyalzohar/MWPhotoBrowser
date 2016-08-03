@@ -352,4 +352,8 @@
     }
 }
 
+- (NSURL *)getPhotoURL {
+	return self.photoURL;
+}
+
 @end
