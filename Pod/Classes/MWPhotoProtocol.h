@@ -68,4 +68,7 @@
 // Cancel any background loading of image data
 - (void)cancelAnyLoading;
 
+// Get Photo URL
+- (NSURL *)getPhotoURL;
+
 @end
