@@ -1598,7 +1598,7 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
         	if ([photo respondsToSelector:@selector(isVideo)] && photo.isVideo) {
         	    [self.delegate photoBrowser:self actionButtonPressedForPhotoURL:photo.videoURL];
         	 } else {
-        	    [self.delegate photoBrowser:self actionButtonPressedForPhotoURL:photo.photoURL];
+        	    [self.delegate photoBrowser:self actionButtonPressedForPhotoURL:[photo getPhotoURL]];
         	 }
         } else {
             
