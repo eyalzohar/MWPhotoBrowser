@@ -1116,7 +1116,7 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
         _actionButton.enabled = YES;
         _actionButton.tintColor = nil;
     }*/
-    if ([self.delegate respondsToSelector:@selector(photoBrowser:actionButtonPressedForPhotoAtIndex:)]) {
+    if ([self.delegate respondsToSelector:@selector(photoBrowser:actionButtonPressedForPhotoAtIndex:)] || [self.delegate respondsToSelector:@selector(photoBrowser:actionButtonPressedForPhotoURL:)]) {
      	_actionButton.enabled = YES;
         _actionButton.tintColor = nil;
     }
@@ -1594,6 +1594,12 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
             // Let delegate handle things
             [self.delegate photoBrowser:self actionButtonPressedForPhotoAtIndex:_currentPageIndex];
             
+        } else if ([self.delegate respondsToSelector:@selector(photoBrowser:actionButtonPressedForPhotoURL:)]) {
+        	if ([photo respondsToSelector:@selector(isVideo)] && photo.isVideo) {
+        	    [self.delegate photoBrowser:self actionButtonPressedForPhotoURL:photo.videoURL];
+        	 } else {
+        	    [self.delegate photoBrowser:self actionButtonPressedForPhotoURL:photo.photoURL];
+        	 }
         } else {
             
             // Show activity view controller
