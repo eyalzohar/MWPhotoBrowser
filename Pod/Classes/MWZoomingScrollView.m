@@ -22,7 +22,7 @@
 	MWTapDetectingImageView *_photoImageView;
 	DACircularProgressView *_loadingIndicator;
     UIImageView *_loadingError;
-    
+    UILabel *_loadingErrorLabel;
 }
 
 @end
@@ -172,8 +172,7 @@
     if (![_photo respondsToSelector:@selector(emptyImage)] || !_photo.emptyImage) {
         if (!_loadingError) {
             _loadingError = [UIImageView new];
-            _loadingError.image = [UIImage imageForResourcePath:@"MWPhotoBrowser.bundle/file_not_supported" ofType:@"png" inBundle:[NSBundle bundleForClass:[self class]]];
-            _loadingError.backgroundColor = [UIColor redColor];
+            _loadingError.image = [UIImage imageForResourcePath:@"MWPhotoBrowser.bundle/fileNotSupported" ofType:@"png" inBundle:[NSBundle bundleForClass:[self class]]];
             _loadingError.userInteractionEnabled = NO;
             _loadingError.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin |
             UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin;
@@ -184,6 +183,19 @@
                                          floorf((self.bounds.size.height - _loadingError.frame.size.height) / 2),
                                          _loadingError.frame.size.width,
                                          _loadingError.frame.size.height);
+        
+        if (!_loadingErrorLabel) {
+            _loadingErrorLabel = [UILabel new];
+            _loadingErrorLabel.text = @"File not supported";
+            _loadingErrorLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:17];
+            _loadingErrorLabel.textColor = [UIColor colorWithRed:185.0/255.0 green:185.0/255.0 blue:185.0/255.0 alpha:1.0];
+            [_loadingErrorLabel sizeToFit];
+            [self addSubview:_loadingErrorLabel];
+        }
+        _loadingErrorLabel.frame = CGRectMake(floorf((self.bounds.size.width - _loadingErrorLabel.frame.size.width) / 2.),
+                                              floorf(_loadingError.frame.origin.y + _loadingError.frame.size.height + 19),
+                                              _loadingErrorLabel.frame.size.width,
+                                              _loadingErrorLabel.frame.size.height);
     }
 }
 
@@ -191,6 +203,9 @@
     if (_loadingError) {
         [_loadingError removeFromSuperview];
         _loadingError = nil;
+        
+        [_loadingErrorLabel removeFromSuperview];
+        _loadingErrorLabel = nil;
     }
 }
 
