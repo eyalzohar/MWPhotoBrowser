@@ -172,7 +172,8 @@
     if (![_photo respondsToSelector:@selector(emptyImage)] || !_photo.emptyImage) {
         if (!_loadingError) {
             _loadingError = [UIImageView new];
-            _loadingError.image = [UIImage imageForResourcePath:@"MWPhotoBrowser.bundle/delivery_attachment" ofType:@"png" inBundle:[NSBundle bundleForClass:[self class]]];
+            _loadingError.image = [UIImage imageForResourcePath:@"MWPhotoBrowser.bundle/file_not_supported" ofType:@"png" inBundle:[NSBundle bundleForClass:[self class]]];
+            _loadingError.backgroundColor = [UIColor redColor];
             _loadingError.userInteractionEnabled = NO;
             _loadingError.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin |
             UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin;
