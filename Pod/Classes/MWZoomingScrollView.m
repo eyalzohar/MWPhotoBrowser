@@ -186,7 +186,7 @@
         
         if (!_loadingErrorLabel) {
             _loadingErrorLabel = [UILabel new];
-            _loadingErrorLabel.text = @"File not supported";
+            _loadingErrorLabel.text = @"No Preview Available";
             _loadingErrorLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:17];
             _loadingErrorLabel.textColor = [UIColor colorWithRed:185.0/255.0 green:185.0/255.0 blue:185.0/255.0 alpha:1.0];
             [_loadingErrorLabel sizeToFit];
